@@ -5,6 +5,8 @@
 // Beatrix House
 
 #include <iostream>
+#include <fstream>
+
 using namespace std;
 
 typedef int GradeType[100];  // declares a new data type: 
@@ -18,6 +20,7 @@ int   findLowest  (const GradeType, int);  // finds lowest of all grades
 int main()
 
 {
+    ifstream inputFile;
     GradeType  grades;				   // the array holding the grades.
     int  numberOfGrades;				   // the number of grades read.
     int pos;							   // index to the array.
@@ -25,22 +28,24 @@ int main()
 	float avgOfGrades;			   // contains the average of the grades.
 	int highestGrade;			   // contains the highest grade.
 	int lowestGrade;			   // contains the lowest grade.
+	
 
 	// Read in the values into the array
-
+	inputFile.open("gradfile.txt");
+	
 	pos = 0;
-	cout << "Please input a grade from 1 to 100, (or -99 to stop)" << endl;
-	cin  >> grades[pos];
-
-	while (grades[pos] != -99)
+	
+	inputFile >> grades[pos];
+	
+	
+	
+	while (inputFile)
 	{
-
-        // Fill in the code to read the grades
-        pos++;
-        cin >> grades[pos];
-
+	    cout << "The grade[" << pos << "] from the file is " << grades[pos] << "." << endl;
+	    pos++;
+	    inputFile >> grades[pos];
 	}
-
+	
 	numberOfGrades = pos;  // Fill blank with appropriate identifier
 
 	// call to the function to find average
@@ -65,6 +70,7 @@ int main()
     // Fill in code to write the lowest to the screen
     cout << endl << "The lowest grade is " << lowestGrade << ". It must belong to Beatrix." << endl;
 
+    inputFile.close();
 	return 0;
 }
 
